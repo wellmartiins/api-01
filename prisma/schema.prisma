@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // alterar para o banco usado
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  name      String   @db.VarChar(60)
+  email     String   @db.VarChar(120)
+  password  String   @db.VarChar(45)
+  createdAt DateTime @default(now()) @db.Timestamp(0) //pega a data e hr atual no servidor
+  apdatedAt DateTime @default(now()) @db.Timestamp(0) //pega a data e hr atual no servidor
+
+  @@map("users") //mapeia a tabela do banco com o nome que está no banco.
+}
